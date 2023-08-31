@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Website</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Add your CSS styles here */
+        ul#navList {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            z-index: 1; /* Bring navigation links above */
+        }
+        ul#navList li {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div class="inner">
+            <!-- Logo -->
+            <div class="container2">
+                <a href="index.html" class="logo">
+                    <span class="symbol"><img src="images/logo_dark.png" alt="" /></span>
+                </a>
+                <h4><a href="index.html" class="link">Home</a> \ <a href="filmography.html" class="link">Filmography</a></h4>
+            </div>
+        </div>
+    </header>
+
+    <!-- Nav -->
+    <ul id="navList">
+        <li><a href="filmography_a_world_of_sleep.html">A World of Sleep</a></li>
+    </ul>
+
+    <main class="main-content">
+        <!-- Your main content goes here -->
+    </main>
+
+    <div class="container2">
+        <footer>
+            <p class="footer">© 2023 Dipolvere | All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Function to calculate random non-overlapping positions
+        function randomNonOverlappingPosition(element) {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const elementWidth = element.offsetWidth;
+            const elementHeight = element.offsetHeight;
+
+            const homeButton = document.querySelector('.logo');
+            const homeButtonRect = homeButton.getBoundingClientRect();
+
+            let x, y;
+
+            do {
+                x = Math.random() * (screenWidth - elementWidth);
+                y = Math.random() * (screenHeight - elementHeight);
+            } while (
+                x > homeButtonRect.left - elementWidth &&
+                x < homeButtonRect.right &&
+                y > homeButtonRect.top - elementHeight &&
+                y < homeButtonRect.bottom
+            );
+
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+        }
+
+        // Get the ul element containing the navigation links
+        const navList = document.getElementById('navList');
+
+        // Get an array of all list items
+        const listItems = Array.from(navList.getElementsByTagName('li'));
+
+        // Position each list item randomly without overlapping
+        listItems.forEach(item => {
+            randomNonOverlappingPosition(item);
+        });
+    </script>
+</body>
+
+</html>
